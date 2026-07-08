@@ -22,6 +22,7 @@ import headlightsImage from "@/assets/categories/headlights.webp";
 import electricsImage from "@/assets/categories/electrics.webp";
 import serviceKitsImage from "@/assets/categories/service-kits.webp";
 import { ContactProvider, ContactTrigger } from "@/components/contact-dialog";
+import { ContactLink } from "@/components/contact-link";
 import { FaqAccordionItem } from "@/components/faq-accordion-item";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { SmoothScrollLink } from "@/components/smooth-scroll-link";
@@ -546,13 +547,13 @@ function Footer({ locale, messages }: LandingPageProps) {
           </h2>
           <div className="mt-4 grid gap-2 text-sm text-slate-400">
             {contacts.map((contact) => (
-              <a
+              <ContactLink
                 key={contact.key}
                 href={contact.href}
                 className="transition duration-200 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               >
                 {messages.contact.options[contact.key].label}
-              </a>
+              </ContactLink>
             ))}
           </div>
         </div>

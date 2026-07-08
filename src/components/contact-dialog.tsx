@@ -11,6 +11,7 @@ import {
 } from 'react';
 import {PhoneCall, X} from 'lucide-react';
 import {useTranslations} from 'next-intl';
+import {ContactLink} from '@/components/contact-link';
 import {contacts} from '@/config/contacts';
 
 type ContactContextValue = {
@@ -49,7 +50,7 @@ export function ContactProvider({children}: {children: ReactNode}) {
 
             <div className="grid gap-3">
               {contacts.map((contact) => (
-                <a
+                <ContactLink
                   key={contact.key}
                   href={contact.href}
                   className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition-colors duration-200 ease-out hover:border-gold/50 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
@@ -76,7 +77,7 @@ export function ContactProvider({children}: {children: ReactNode}) {
                       {t(`options.${contact.key}.hint` as const)}
                     </span>
                   </span>
-                </a>
+                </ContactLink>
               ))}
             </div>
           </Dialog.Content>

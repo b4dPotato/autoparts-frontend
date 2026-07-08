@@ -88,6 +88,34 @@ export default async function LocaleLayout({children, params}: LocaleLayoutProps
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-Q38XFFSC6K');
+            gtag('config', 'AW-18266849083');
+          `}
+        </Script>
+        <Script id="gtag-contact-conversion" strategy="afterInteractive">
+          {`
+            function gtag_report_conversion(url) {
+              var navigated = false;
+              var callback = function () {
+                if (!navigated && typeof url !== 'undefined') {
+                  navigated = true;
+                  window.location.href = url;
+                }
+              };
+
+              if (typeof gtag !== 'function') {
+                callback();
+                return false;
+              }
+
+              gtag('event', 'conversion', {
+                'send_to': 'AW-18266849083/VFvmCKCq8swcELv-p4ZE',
+                'event_callback': callback,
+                'event_timeout': 2000
+              });
+
+              window.setTimeout(callback, 2100);
+              return false;
+            }
           `}
         </Script>
       </head>
