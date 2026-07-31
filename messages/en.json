@@ -135,6 +135,11 @@
     "navTitle": "Navigation",
     "languageTitle": "Languages",
     "contactsTitle": "Contacts",
+    "business": {
+      "owner": "Sole proprietor: Bodarlan Ruslan Volodymyrovych",
+      "taxIdLabel": "Tax ID",
+      "phoneLabel": "Phone"
+    },
     "languages": {
       "uk": "Українська",
       "ru": "Русский",

@@ -26,6 +26,7 @@ import { ContactLink } from "@/components/contact-link";
 import { FaqAccordionItem } from "@/components/faq-accordion-item";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { SmoothScrollLink } from "@/components/smooth-scroll-link";
+import { businessInfo } from "@/config/business";
 import { contacts } from "@/config/contacts";
 import { locales, type Locale } from "@/i18n/routing";
 import type { AppMessages } from "@/i18n/messages";
@@ -73,7 +74,7 @@ export function LandingPage({ locale, messages }: LandingPageProps) {
 
 function Header({ locale, messages }: LandingPageProps) {
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-[#05080d]/82 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-md">
+    <header className="scroll-lock-compensated fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-[#05080d]/82 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-md">
       <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
         <Link
           href={`/${locale}`}
@@ -523,6 +524,23 @@ function Footer({ locale, messages }: LandingPageProps) {
           <p className="mt-5 max-w-sm text-sm leading-6 text-slate-400">
             {messages.footer.description}
           </p>
+          <address className="mt-5 max-w-sm border-l border-white/10 pl-3 text-xs not-italic leading-5 text-slate-500 sm:mt-6">
+            <span className="block text-slate-400">
+              {messages.footer.business.owner}
+            </span>
+            <span className="block">
+              {messages.footer.business.taxIdLabel}: {businessInfo.taxId}
+            </span>
+            <span className="block">
+              {messages.footer.business.phoneLabel}:{" "}
+              <ContactLink
+                href={`tel:${businessInfo.phone.international}`}
+                className="rounded-sm underline decoration-white/20 underline-offset-2 transition duration-200 hover:text-gold hover:decoration-gold/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              >
+                {businessInfo.phone.display}
+              </ContactLink>
+            </span>
+          </address>
         </div>
         <FooterList
           title={messages.footer.navTitle}

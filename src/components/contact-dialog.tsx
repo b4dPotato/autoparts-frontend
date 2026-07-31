@@ -12,13 +12,21 @@ import {
 import {PhoneCall, X} from 'lucide-react';
 import {useTranslations} from 'next-intl';
 import {ContactLink} from '@/components/contact-link';
-import {contacts} from '@/config/contacts';
+import {contactPhone, contacts} from '@/config/contacts';
 
 type ContactContextValue = {
   open: () => void;
 };
 
+type MessengerContact = Exclude<
+  (typeof contacts)[number],
+  {readonly key: 'phone'}
+>;
+
 const ContactContext = createContext<ContactContextValue | null>(null);
+const messengerContacts = contacts.filter(
+  (contact): contact is MessengerContact => contact.key !== 'phone'
+);
 
 export function ContactProvider({children}: {children: ReactNode}) {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,37 +56,38 @@ export function ContactProvider({children}: {children: ReactNode}) {
               </Dialog.Close>
             </div>
 
-            <div className="grid gap-3">
-              {contacts.map((contact) => (
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              {messengerContacts.map((contact) => (
                 <ContactLink
                   key={contact.key}
                   href={contact.href}
-                  className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition-colors duration-200 ease-out hover:border-gold/50 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                  className="group flex min-h-28 flex-col items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-2 py-4 text-center transition duration-200 ease-out hover:-translate-y-0.5 hover:border-gold/50 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                   aria-label={t(`options.${contact.key}.aria` as const)}
                 >
-                  {contact.icon ? (
-                    <Image
-                      src={contact.icon}
-                      alt=""
-                      width={44}
-                      height={44}
-                      className="h-11 w-11 shrink-0"
-                    />
-                  ) : (
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold text-ink">
-                      <PhoneCall aria-hidden="true" className="h-5 w-5" />
-                    </span>
-                  )}
-                  <span>
-                    <span className="block font-semibold text-white">
-                      {t(`options.${contact.key}.label` as const)}
-                    </span>
-                    <span className="mt-1 block text-sm text-slate-400 transition duration-200 group-hover:text-slate-300">
-                      {t(`options.${contact.key}.hint` as const)}
-                    </span>
+                  <Image
+                    src={contact.icon}
+                    alt=""
+                    width={44}
+                    height={44}
+                    className="h-11 w-11 shrink-0 transition duration-200 group-hover:scale-105"
+                  />
+                  <span className="text-sm font-semibold text-white">
+                    {t(`options.${contact.key}.label` as const)}
                   </span>
                 </ContactLink>
               ))}
+              <ContactLink
+                href={`tel:${contactPhone.international}`}
+                className="col-span-3 flex min-h-14 items-center justify-center gap-3 rounded-2xl border border-gold/25 bg-gold/[0.08] px-4 py-3 text-center transition duration-200 ease-out hover:border-gold/55 hover:bg-gold/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                aria-label={t('options.phone.aria')}
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold text-ink">
+                  <PhoneCall aria-hidden="true" className="h-4 w-4" />
+                </span>
+                <span className="font-semibold text-white">
+                  {contactPhone.display}
+                </span>
+              </ContactLink>
             </div>
           </Dialog.Content>
         </Dialog.Portal>

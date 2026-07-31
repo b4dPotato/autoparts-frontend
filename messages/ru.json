@@ -135,6 +135,11 @@
     "navTitle": "Навигация",
     "languageTitle": "Языки",
     "contactsTitle": "Контакты",
+    "business": {
+      "owner": "ФЛП Бодарлан Руслан Владимирович",
+      "taxIdLabel": "РНУКПН",
+      "phoneLabel": "Телефон"
+    },
     "languages": {
       "uk": "Українська",
       "ru": "Русский",
