@@ -1,14 +1,14 @@
 {
   "metadata": {
-    "title": "Auto parts delivered across Ukraine | AutoParts Ukraine",
-    "description": "Auto parts matched by VIN, vehicle model, or part photo. Original, OEM, or quality analog parts with Nova Poshta delivery across Ukraine.",
-    "ogTitle": "Auto parts for your vehicle with delivery across Ukraine",
-    "ogDescription": "Message us and we will match the right part by VIN, vehicle model, or photo.",
-    "ogImageAlt": "Auto parts in a warehouse with a brake disc, shock absorber, and filter"
+    "title": "New and used auto parts — VIN matching | AutoParts UA",
+    "description": "New auto parts and used parts from dismantling for different vehicles and budgets. Parts matched by VIN, part number, or photo with delivery across Ukraine.",
+    "ogTitle": "New and used auto parts for your vehicle",
+    "ogDescription": "We match new auto parts or used parts from dismantling by VIN, part number, or photo and offer options for your budget.",
+    "ogImageAlt": "New and used auto parts for different vehicles"
   },
   "seo": {
     "areaServed": "Ukraine",
-    "contactType": "Auto parts matching"
+    "contactType": "New and used auto parts matching by VIN"
   },
   "header": {
     "logo": "AutoParts UA",
@@ -20,13 +20,13 @@
       {"label": "Categories", "href": "#categories"},
       {"label": "How it works", "href": "#how-it-works"},
       {"label": "Budget", "href": "#budget"},
-      {"label": "Delivery", "href": "#delivery"},
+      {"label": "New & used", "href": "#new-and-used"},
       {"label": "FAQ", "href": "#faq"}
     ]
   },
   "hero": {
-    "title": "Auto parts for your vehicle with delivery across Ukraine",
-    "subtitle": "We match parts by VIN, vehicle model, or part photo. No long forms - just message us.",
+    "title": "New and used auto parts for your vehicle",
+    "subtitle": "Original, OEM, and analog options for different budgets. We match by VIN, part number, or photo.",
     "primaryCta": "Find my part",
     "secondaryAction": "Match by VIN",
     "vehicleIntro": "We match parts for:",
@@ -59,13 +59,25 @@
       }
     }
   },
+  "mobileContact": {
+    "aria": "Quick contact",
+    "labels": {
+      "phone": "Call",
+      "viber": "Viber",
+      "telegram": "Telegram",
+      "whatsapp": "WhatsApp"
+    }
+  },
   "trust": {
     "aria": "Service advantages",
+    "eyebrow": "Confirmation process",
+    "title": "Everything is confirmed before you order",
+    "text": "We check compatibility and confirm the part, payment, and delivery details in advance.",
     "items": [
-      {"title": "VIN matching", "text": "We check compatibility before purchase."},
-      {"title": "Nova Poshta shipping", "text": "We deliver parts to cities and villages across Ukraine."},
-      {"title": "Pay on delivery", "text": "You can inspect the parcel at the branch."},
-      {"title": "Original or quality analog", "text": "We match the option that fits your budget."}
+      {"title": "Matched to your vehicle", "text": "We check VIN compatibility and find options for your budget."},
+      {"title": "Real photos of used parts", "text": "We send photos of the specific part and tell you its condition."},
+      {"title": "Warranty and returns", "text": "Warranty and return terms are confirmed before ordering."},
+      {"title": "Payment and delivery", "text": "After confirmation, we provide official sole-proprietor payment details and ship with Nova Poshta."}
     ]
   },
   "categories": {
@@ -79,17 +91,36 @@
       {"title": "Body parts", "text": "Body elements, fasteners, and related parts.", "aria": "Match body parts"},
       {"title": "Lighting", "text": "Headlights, bulbs, tail lights, and lighting electronics.", "aria": "Match automotive lighting"},
       {"title": "Electrical", "text": "Batteries, sensors, relays, wiring, and modules.", "aria": "Match electrical components"},
-      {"title": "Service kits", "text": "Kits for scheduled vehicle maintenance.", "aria": "Match a service kit"}
+      {"title": "Service kits", "text": "Kits for scheduled vehicle maintenance.", "aria": "Match a service kit"},
+      {"title": "Gearbox and clutch", "text": "Gearboxes, clutch kits, flywheels, and driveshaft components.", "aria": "Match gearbox and clutch parts"},
+      {"title": "Steering", "text": "Racks, pumps, tie rods, ends, and steering mechanisms.", "aria": "Match steering parts"},
+      {"title": "Cooling", "text": "Radiators, pumps, thermostats, fans, and hoses.", "aria": "Match cooling system parts"},
+      {"title": "Air conditioning", "text": "Compressors, condensers, evaporators, and related components.", "aria": "Match air conditioning parts"},
+      {"title": "Fuel system", "text": "Injectors, pumps, rails, tanks, and regulators.", "aria": "Match fuel system parts"},
+      {"title": "Exhaust", "text": "Mufflers, catalytic converters, manifolds, sensors, and mounts.", "aria": "Match exhaust system parts"},
+      {"title": "Interior", "text": "Seats, panels, switches, trim, and interior equipment.", "aria": "Match interior parts"},
+      {"title": "Other parts", "text": "We can help source other assemblies, parts, and components.", "aria": "Match other auto parts"}
     ]
+  },
+  "newAndUsed": {
+    "title": "New and used parts in one request",
+    "text": "We source new auto parts and used parts from dismantling for vehicles of different makes, years, and price segments.",
+    "options": [
+      {"title": "New parts", "text": "Original, OEM, quality, and budget analogs — matched for compatibility and your budget."},
+      {"title": "Used parts", "text": "We look for a specific dismantled part that matches your vehicle and confirm the offer before you order."}
+    ],
+    "groups": ["Engines", "Gearboxes", "Lighting", "Body parts", "Electronic modules", "Alternators and starters", "Turbochargers", "Suspension", "Interior parts", "Other parts"],
+    "usedPartDetails": "Before ordering a used part, you receive real photos of the specific part offered, information about its condition, warranty, and return terms.",
+    "cta": "Check availability and price of a used part"
   },
   "how": {
     "title": "How it works",
     "text": "No cart, account, or long forms. Everything happens in the messenger that is easiest for you.",
     "steps": [
-      {"title": "Send VIN or vehicle model", "text": "You can add a part photo, part number, or a short issue description."},
-      {"title": "We match available options", "text": "We check compatibility and suggest parts that are available."},
-      {"title": "You choose brand and budget", "text": "We explain the difference between original, OEM, and analog options."},
-      {"title": "We ship across Ukraine", "text": "We confirm delivery details and hand the order to Nova Poshta."}
+      {"title": "Send your vehicle details", "text": "Share the VIN, make, model, and year, or add the part number or a photo."},
+      {"title": "We search for compatible options", "text": "We check new and/or used offers against your vehicle details."},
+      {"title": "Receive offers and details", "text": "You receive options, prices, and relevant information; for used parts, this includes real photos, condition, and warranty terms."},
+      {"title": "Confirm, pay, and receive", "text": "After confirmation, we provide official sole-proprietor (FOP) payment details and ship the order with Nova Poshta."}
     ]
   },
   "budget": {
@@ -98,17 +129,17 @@
     "recommendedBadge": "Best balance",
     "items": [
       {"title": "Original", "text": "Original parts for maximum alignment with manufacturer requirements."},
-      {"title": "OEM / Premium Analog", "text": "A strong balance of durability, brand trust, and price for everyday use."},
+      {"title": "OEM / Quality Analog", "text": "A balanced option for quality, durability, and price in everyday use."},
       {"title": "Budget Analog", "text": "An accessible option when you need to solve the problem without overpaying."}
     ]
   },
   "delivery": {
     "title": "Delivery and payment",
-    "text": "Before shipping, we confirm compatibility, payment method, and the most convenient branch or delivery address.",
+    "text": "After order confirmation, we provide official sole-proprietor (FOP) payment details and confirm the preferred branch or delivery address.",
     "items": [
       {"title": "Delivery across Ukraine", "text": "We work with customers in every region where delivery is available."},
       {"title": "Nova Poshta", "text": "We ship to branches, parcel lockers, or by courier."},
-      {"title": "Pay on delivery", "text": "Cash on delivery is available by agreement."},
+      {"title": "Payment to official FOP details", "text": "Payment details are sent after the order is confirmed."},
       {"title": "Pre-purchase consultation", "text": "We help compare brands and confirm compatibility."},
       {"title": "Compatibility check", "text": "We verify vehicle, year, engine, and VIN before recommending a part."}
     ]
@@ -120,7 +151,7 @@
       {"question": "How do I match a part by VIN?", "answer": "Send your VIN code in Telegram, Viber, or WhatsApp. We will check the vehicle configuration, verify compatibility, and suggest available part options."},
       {"question": "Can I order without a part number?", "answer": "Yes. If you do not have a number, send the make, model, year, engine, or a photo of the part. That is often enough to start matching."},
       {"question": "Do you deliver across Ukraine?", "answer": "Yes, we ship auto parts across Ukraine via Nova Poshta to branches, parcel lockers, or courier delivery where available."},
-      {"question": "Can I pay on delivery?", "answer": "In many cases, payment on delivery is available. A manager will confirm the terms after matching the specific item and delivery cost."},
+      {"question": "How do I pay for an order?", "answer": "After you select the part and confirm the order, the manager sends official sole-proprietor (FOP) payment details. We do not publish bank details on the website in advance."},
       {"question": "How do I know the part will fit?", "answer": "We check compatibility by VIN, vehicle parameters, cross-numbers, and technical specifications. If anything is unclear, we will ask for an extra photo or details."},
       {"question": "Do you sell original parts or analogs?", "answer": "We can offer original parts, OEM parts, or quality analogs. You choose the option that best matches price, brand, and expected durability."}
     ]
@@ -131,7 +162,7 @@
     "button": "Find my part"
   },
   "footer": {
-    "description": "Premium auto parts matching without extra forms: consultation, compatibility checks, and delivery across Ukraine.",
+    "description": "New and used auto parts for different budgets, with consultation, compatibility checks, and delivery across Ukraine.",
     "navTitle": "Navigation",
     "languageTitle": "Languages",
     "contactsTitle": "Contacts",
