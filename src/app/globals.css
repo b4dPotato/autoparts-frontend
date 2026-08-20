@@ -33,6 +33,20 @@ body[data-scroll-locked] .scroll-lock-compensated {
   padding-right: var(--removed-body-scroll-bar-size, 0px);
 }
 
+.mobile-contact-bar {
+  bottom: calc(0.625rem + env(safe-area-inset-bottom));
+}
+
+.mobile-contact-bar-space {
+  padding-bottom: calc(5.25rem + env(safe-area-inset-bottom));
+}
+
+@media (min-width: 768px) {
+  .mobile-contact-bar-space {
+    padding-bottom: 0;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -67,69 +81,10 @@ summary::-webkit-details-marker {
   will-change: opacity, transform;
 }
 
-.trust-badge-card {
-  background:
-    radial-gradient(circle at 82% 8%, rgba(242, 184, 75, 0.2), transparent 34%),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.045) 38%, rgba(7, 12, 19, 0.92)),
-    rgba(9, 17, 27, 0.82);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    inset 0 -1px 0 rgba(242, 184, 75, 0.08),
-    0 18px 54px rgba(0, 0, 0, 0.34);
-}
-
-.trust-badge-card::before,
-.trust-badge-card::after {
-  position: absolute;
-  content: "";
-  pointer-events: none;
-}
-
-.trust-badge-card::before {
-  inset: 0;
-  border-radius: inherit;
-  background:
-    linear-gradient(115deg, rgba(255, 255, 255, 0.18), transparent 28%),
-    linear-gradient(180deg, transparent 58%, rgba(242, 184, 75, 0.08));
-  opacity: 0.72;
-  transition: opacity 300ms ease;
-}
-
-.trust-badge-card::after {
-  right: -38px;
-  top: -44px;
-  width: 110px;
-  height: 110px;
-  border-radius: 999px;
-  background: rgba(242, 184, 75, 0.18);
-  filter: blur(22px);
-  opacity: 0.7;
-  transition:
-    opacity 300ms ease,
-    transform 300ms ease;
-}
-
-.trust-badge-card:hover::before {
-  opacity: 1;
-}
-
-.trust-badge-card:hover::after {
-  opacity: 1;
-  transform: scale(1.12);
-}
-
-.trust-badge-card > * {
-  position: relative;
-  z-index: 1;
-}
-
-.trust-badge-card__icon {
-  background:
-    radial-gradient(circle at 35% 20%, rgba(255, 255, 255, 0.2), transparent 34%),
-    rgba(242, 184, 75, 0.12);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    0 12px 34px rgba(242, 184, 75, 0.2);
+.hero-title-shadow {
+  text-shadow:
+    0 3px 16px rgba(0, 0, 0, 0.85),
+    0 1px 2px rgba(0, 0, 0, 0.95);
 }
 
 .budget-option-card {

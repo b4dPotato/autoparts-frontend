@@ -4,11 +4,11 @@ import {
   ArrowDown,
   BadgeCheck,
   BusFront,
+  Camera,
   Car,
-  CreditCard,
   PhoneCall,
+  ShieldCheck,
   ShoppingBag,
-  Sparkles,
   Truck,
   Van,
   type LucideIcon,
@@ -21,6 +21,14 @@ import bodyPartsImage from "@/assets/categories/body-parts.webp";
 import headlightsImage from "@/assets/categories/headlights.webp";
 import electricsImage from "@/assets/categories/electrics.webp";
 import serviceKitsImage from "@/assets/categories/service-kits.webp";
+import gearboxClutchImage from "@/assets/categories/gearbox-clutch.webp";
+import steeringImage from "@/assets/categories/steering.webp";
+import coolingImage from "@/assets/categories/cooling.webp";
+import airConditioningImage from "@/assets/categories/air-conditioning.webp";
+import fuelSystemImage from "@/assets/categories/fuel-system.webp";
+import exhaustImage from "@/assets/categories/exhaust.webp";
+import interiorImage from "@/assets/categories/interior.webp";
+import otherPartsImage from "@/assets/categories/other-parts.webp";
 import { ContactProvider, ContactTrigger } from "@/components/contact-dialog";
 import { ContactLink } from "@/components/contact-link";
 import { FaqAccordionItem } from "@/components/faq-accordion-item";
@@ -36,8 +44,34 @@ type LandingPageProps = {
   messages: AppMessages;
 };
 
-const trustIcons = [BadgeCheck, Truck, CreditCard, Sparkles];
+const trustIcons: LucideIcon[] = [
+  BadgeCheck,
+  Camera,
+  ShieldCheck,
+  Truck,
+];
+const trustIconStyles = [
+  "text-amber-300 drop-shadow-[0_0_12px_rgba(252,211,77,0.7)]",
+  "text-violet-400 drop-shadow-[0_0_12px_rgba(167,139,250,0.7)]",
+  "text-cyan-300 drop-shadow-[0_0_12px_rgba(103,232,249,0.7)]",
+  "text-amber-300 drop-shadow-[0_0_12px_rgba(252,211,77,0.7)]",
+];
+const trustStepConnectorStyles = [
+  "from-amber-300 via-amber-300/70 to-violet-400",
+  "from-violet-400 via-violet-400/70 to-cyan-300",
+  "from-cyan-300 via-cyan-300/70 to-amber-300",
+];
 const vehicleTypeIcons: LucideIcon[] = [Car, Truck, Van, BusFront];
+const vehicleTypeIconStyles = [
+  "text-sky-400 drop-shadow-[0_0_10px_rgba(56,189,248,0.42)]",
+  "text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.42)]",
+  "text-violet-400 drop-shadow-[0_0_10px_rgba(167,139,250,0.42)]",
+  "text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.42)]",
+];
+const newAndUsedIconStyles = [
+  "border-sky-400/25 bg-sky-400/10 text-sky-300",
+  "border-violet-400/25 bg-violet-400/10 text-violet-300",
+];
 const brandLogo = "/assets/logo/logo-full-dark-transparent.png";
 const categoryImages: StaticImageData[] = [
   brakesImage,
@@ -48,6 +82,14 @@ const categoryImages: StaticImageData[] = [
   headlightsImage,
   electricsImage,
   serviceKitsImage,
+  gearboxClutchImage,
+  steeringImage,
+  coolingImage,
+  airConditioningImage,
+  fuelSystemImage,
+  exhaustImage,
+  interiorImage,
+  otherPartsImage,
 ];
 
 export function LandingPage({ locale, messages }: LandingPageProps) {
@@ -55,18 +97,20 @@ export function LandingPage({ locale, messages }: LandingPageProps) {
 
   return (
     <ContactProvider>
-      <div className="min-h-screen overflow-hidden bg-ink text-white">
+      <div className="mobile-contact-bar-space min-h-screen overflow-hidden bg-ink text-white">
         <Header locale={locale} messages={t} />
         <main>
           <Hero messages={t} />
           <TrustStrip messages={t} />
           <Categories messages={t} />
+          <NewAndUsedParts messages={t} />
           <BudgetOptions messages={t} />
           <HowItWorks messages={t} />
           <Faq messages={t} />
           <FinalCta messages={t} />
         </main>
         <Footer locale={locale} messages={t} />
+        <MobileContactBar messages={t} />
       </div>
     </ContactProvider>
   );
@@ -149,13 +193,17 @@ function Hero({ messages }: { messages: AppMessages }) {
         <span className="hero-premium-depth" aria-hidden="true" />
       </div>
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,8,13,0.95)_0%,rgba(5,8,13,0.78)_36%,rgba(5,8,13,0.28)_72%,rgba(5,8,13,0.08)_100%)] md:bg-[linear-gradient(90deg,rgba(5,8,13,0.96)_0%,rgba(5,8,13,0.82)_34%,rgba(5,8,13,0.2)_70%,rgba(5,8,13,0.05)_100%)]" />
+      <div
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_30%,rgba(5,8,13,0.78)_0%,rgba(5,8,13,0.52)_40%,rgba(5,8,13,0)_72%)] md:hidden"
+        aria-hidden="true"
+      />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-20 pt-32 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
           <h1
             id="hero-title"
-            className="text-4xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl"
+            className="hero-title-shadow text-4xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl"
           >
             {messages.hero.title}
           </h1>
@@ -179,7 +227,7 @@ function Hero({ messages }: { messages: AppMessages }) {
                   >
                     <Icon
                       aria-hidden="true"
-                      className="mb-3 h-7 w-7 text-gold transition duration-300 group-hover:text-[#ffd06d]"
+                      className={`mb-3 h-7 w-7 transition duration-300 group-hover:scale-110 group-hover:brightness-125 ${vehicleTypeIconStyles[index]}`}
                       strokeWidth={1.9}
                     />
                     <span>{item}</span>
@@ -245,40 +293,112 @@ function ContactButtonContent({ label }: { label: string }) {
   );
 }
 
+function MobileContactBar({ messages }: { messages: AppMessages }) {
+  const directContactKeys = ["phone", "viber", "telegram", "whatsapp"] as const;
+
+  return (
+    <nav
+      className="mobile-contact-bar fixed inset-x-3 z-40 grid grid-cols-4 rounded-2xl border border-white/10 bg-[#05080d]/82 px-2 py-1.5 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-md md:hidden"
+      aria-label={messages.mobileContact.aria}
+    >
+      {directContactKeys.map((key) => {
+        const contact = contacts.find((item) => item.key === key);
+
+        if (!contact) {
+          return null;
+        }
+
+        return (
+          <ContactLink
+            key={key}
+            href={contact.href}
+            className="flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 rounded-lg px-0.5 py-1 text-center text-[10px] font-medium leading-none text-slate-200 transition-colors duration-200 hover:bg-white/[0.06] hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gold"
+            aria-label={messages.contact.options[key].aria}
+          >
+            {contact.icon ? (
+              <Image
+                src={contact.icon}
+                alt=""
+                width={22}
+                height={22}
+                className="h-[22px] w-[22px] shrink-0"
+              />
+            ) : (
+              <PhoneCall aria-hidden="true" className="h-[22px] w-[22px] text-gold" />
+            )}
+            <span className="max-w-full truncate px-0.5">
+              {messages.mobileContact.labels[key]}
+            </span>
+          </ContactLink>
+        );
+      })}
+    </nav>
+  );
+}
+
 function TrustStrip({ messages }: { messages: AppMessages }) {
   return (
     <section
-      className="relative z-10 px-5 pb-8 pt-6 sm:px-6 md:pt-8 lg:px-8"
-      aria-label={messages.trust.aria}
+      className="relative z-10 overflow-hidden px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24"
+      aria-labelledby="trust-title"
     >
       <div
-        className="absolute inset-x-0 top-6 -z-10 h-32 bg-[linear-gradient(180deg,rgba(242,184,75,0.08),rgba(5,8,13,0))]"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_40%,rgba(10,44,72,0.2),transparent_58%),linear-gradient(180deg,rgba(5,8,13,0.96),rgba(3,7,12,1))]"
         aria-hidden="true"
       />
-      <div className="mx-auto grid max-w-7xl gap-3 min-[480px]:grid-cols-2 lg:grid-cols-4">
-        {messages.trust.items.map((item, index) => {
-          const Icon = trustIcons[index];
-          return (
-            <div
-              key={item.title}
-              className="trust-badge-card group relative overflow-hidden rounded-2xl border border-white/15 p-4 shadow-premium backdrop-blur-xl transition duration-300 ease-out hover:-translate-y-1 hover:border-gold/55 hover:shadow-[0_22px_70px_rgba(242,184,75,0.2)] sm:p-5"
-            >
-              <div className="trust-badge-card__icon flex h-14 w-14 items-center justify-center rounded-2xl border border-gold/35 text-gold transition duration-300 group-hover:border-gold/65 group-hover:bg-gold/20 group-hover:text-[#ffd882]">
-                <Icon
-                  aria-hidden="true"
-                  className="h-7 w-7"
-                  strokeWidth={1.9}
-                />
-              </div>
-              <h2 className="mt-4 text-base font-semibold tracking-tight text-white">
-                {item.title}
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-300/80">
-                {item.text}
-              </p>
-            </div>
-          );
-        })}
+      <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="flex items-center justify-center gap-3 text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-gold sm:text-xs">
+            <span className="h-px w-8 bg-gradient-to-r from-transparent to-gold/80" aria-hidden="true" />
+            <span>{messages.trust.eyebrow}</span>
+            <span className="h-px w-8 bg-gradient-to-l from-transparent to-gold/80" aria-hidden="true" />
+          </div>
+          <h2 id="trust-title" className="mt-5 text-[2.15rem] font-semibold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-5xl">
+            {messages.trust.title}
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300/85 sm:text-lg sm:leading-8">
+            {messages.trust.text}
+          </p>
+        </div>
+        <ol className="mx-auto mt-14 grid max-w-2xl lg:mt-20 lg:max-w-none lg:grid-cols-4 lg:gap-8">
+          {messages.trust.items.map((item, index) => {
+            const Icon = trustIcons[index];
+            return (
+              <li
+                key={item.title}
+                className="relative grid grid-cols-[4.5rem_minmax(0,1fr)] gap-x-5 pb-12 last:pb-0 lg:block lg:pb-0 lg:text-center"
+              >
+                {index < messages.trust.items.length - 1 ? (
+                  <>
+                    <span
+                      className={`absolute bottom-0 left-9 top-16 w-px bg-gradient-to-b opacity-90 lg:hidden ${trustStepConnectorStyles[index]}`}
+                      aria-hidden="true"
+                    />
+                    <span
+                      className={`absolute left-[calc(50%+2rem)] right-[calc(-50%-2rem)] top-8 hidden h-px bg-gradient-to-r opacity-80 lg:block ${trustStepConnectorStyles[index]}`}
+                      aria-hidden="true"
+                    />
+                  </>
+                ) : null}
+                <div className="relative z-10 flex h-16 w-[4.5rem] items-center justify-center bg-[#05090e] lg:mx-auto lg:w-16">
+                  <Icon
+                    aria-hidden="true"
+                    className={`h-14 w-14 transition duration-300 hover:scale-105 ${trustIconStyles[index]}`}
+                    strokeWidth={1.55}
+                  />
+                </div>
+                <div className="pt-1 lg:pt-0">
+                  <h3 className="text-xl font-semibold leading-tight tracking-tight text-white lg:mt-7 lg:text-lg">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-base leading-7 text-slate-300/80 lg:mx-auto lg:max-w-[17rem] lg:text-sm lg:leading-6">
+                    {item.text}
+                  </p>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );
@@ -322,13 +442,14 @@ function Categories({ messages }: { messages: AppMessages }) {
         <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4 lg:gap-4">
           {messages.categories.items.map((item, index) => {
             const image = categoryImages[index];
+
             return (
               <ContactTrigger
                 key={item.title}
                 className="category-catalog-card group overflow-hidden rounded-2xl border border-white/10 bg-[#0a111a] text-left transition duration-300 ease-out hover:-translate-y-1 hover:border-gold/45 hover:shadow-[0_22px_60px_rgba(242,184,75,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                 aria-label={item.aria}
               >
-                <span className="relative block aspect-[16/10] overflow-hidden bg-[#05080d]">
+                <span className="relative block aspect-[4/3] overflow-hidden bg-[#05080d]">
                   <Image
                     src={image}
                     alt=""
@@ -350,6 +471,74 @@ function Categories({ messages }: { messages: AppMessages }) {
               </ContactTrigger>
             );
           })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function NewAndUsedParts({ messages }: { messages: AppMessages }) {
+  return (
+    <section
+      id="new-and-used"
+      className="scroll-mt-24 border-y border-white/10 bg-[#080e16] px-5 py-24 sm:px-6 lg:px-8"
+      aria-labelledby="new-and-used-title"
+    >
+      <div className="mx-auto max-w-7xl">
+        <SectionHeader
+          id="new-and-used-title"
+          eyelessTitle={messages.newAndUsed.title}
+          text={messages.newAndUsed.text}
+        />
+
+        <div className="mt-10 grid gap-4 lg:grid-cols-2">
+          {messages.newAndUsed.options.map((option, index) => {
+            const Icon = index === 0 ? ShoppingBag : Camera;
+
+            return (
+              <div
+                key={option.title}
+                className="rounded-2xl border border-white/10 bg-ink/60 p-6 sm:p-7"
+              >
+                <div className={`flex h-12 w-12 items-center justify-center rounded-xl border ${newAndUsedIconStyles[index]}`}>
+                  <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.9} />
+                </div>
+                <h3 className="mt-5 text-xl font-semibold text-white">
+                  {option.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-slate-300/80">
+                  {option.text}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-6 flex flex-wrap gap-2.5">
+          {messages.newAndUsed.groups.map((group) => (
+            <span
+              key={group}
+              className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-300"
+            >
+              {group}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-8 rounded-2xl border border-gold/25 bg-gold/[0.07] p-6 sm:flex sm:items-center sm:justify-between sm:gap-8 sm:p-7">
+          <div className="flex max-w-3xl gap-4">
+            <ShieldCheck
+              aria-hidden="true"
+              className="mt-0.5 h-6 w-6 shrink-0 text-gold"
+              strokeWidth={1.9}
+            />
+            <p className="text-sm leading-7 text-slate-200">
+              {messages.newAndUsed.usedPartDetails}
+            </p>
+          </div>
+          <ContactTrigger className="cta-pulse-glow mt-6 inline-flex shrink-0 items-center justify-center rounded-full bg-gold px-6 py-3.5 text-sm font-semibold text-ink transition-colors duration-300 ease-out hover:bg-[#ffd06d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:mt-0">
+            <ContactButtonContent label={messages.newAndUsed.cta} />
+          </ContactTrigger>
         </div>
       </div>
     </section>
