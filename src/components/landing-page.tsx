@@ -246,8 +246,8 @@ function Hero({ messages }: { messages: AppMessages }) {
         </div>
       </div>
       <SmoothScrollLink
-        href="#categories"
-        aria-label={messages.categories.title}
+        href="#trust"
+        aria-label={messages.trust.title}
         className="absolute bottom-6 left-1/2 z-20 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white shadow-[0_16px_48px_rgba(0,0,0,0.34)] backdrop-blur-md transition duration-300 ease-out hover:-translate-y-1 hover:border-gold/55 hover:bg-gold/15 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
       >
         <ArrowDown aria-hidden="true" className="h-5 w-5" />
@@ -334,7 +334,8 @@ function MobileContactBar({ messages }: { messages: AppMessages }) {
 function TrustStrip({ messages }: { messages: AppMessages }) {
   return (
     <section
-      className="relative z-10 overflow-hidden px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24"
+      id="trust"
+      className="scroll-mt-24 relative z-10 overflow-hidden px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24"
       aria-labelledby="trust-title"
     >
       <div
