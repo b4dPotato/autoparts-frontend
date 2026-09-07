@@ -5,6 +5,7 @@ import type {
   MouseEvent,
   ReactNode,
 } from "react";
+import { trackElementEvent } from "@/lib/tracking/client";
 
 type SmoothScrollLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string;
@@ -37,6 +38,8 @@ export function SmoothScrollLink({
     if (!target) {
       return;
     }
+
+    trackElementEvent("navigation_click", event.currentTarget);
 
     event.preventDefault();
 

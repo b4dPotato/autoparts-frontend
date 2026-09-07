@@ -12,7 +12,9 @@ import {
 import {PhoneCall, X} from 'lucide-react';
 import {useTranslations} from 'next-intl';
 import {ContactLink} from '@/components/contact-link';
+import {ContactRequestForm} from '@/components/contact-request-form';
 import {contactPhone, contacts} from '@/config/contacts';
+import {trackElementEvent} from '@/lib/tracking/client';
 
 type ContactContextValue = {
   open: () => void;
@@ -28,7 +30,12 @@ const messengerContacts = contacts.filter(
   (contact): contact is MessengerContact => contact.key !== 'phone'
 );
 
-export function ContactProvider({children}: {children: ReactNode}) {
+type ContactProviderProps = {
+  children: ReactNode;
+  showLeadForm: boolean;
+};
+
+export function ContactProvider({children, showLeadForm}: ContactProviderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations('contact');
 
@@ -38,14 +45,14 @@ export function ContactProvider({children}: {children: ReactNode}) {
       <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
         <Dialog.Portal>
           <Dialog.Overlay className="contact-dialog-overlay fixed inset-0 z-50 bg-black/70 backdrop-blur-sm" />
-          <Dialog.Content className="contact-dialog-content fixed inset-x-0 bottom-0 z-50 rounded-t-3xl border border-white/10 bg-[#08111b] p-5 shadow-premium outline-none sm:left-1/2 sm:top-1/2 sm:bottom-auto sm:w-[min(92vw,460px)] sm:rounded-2xl sm:p-6">
-            <div className="mb-5 flex items-start justify-between gap-4">
+          <Dialog.Content className="contact-dialog-content fixed inset-x-0 bottom-0 z-50 max-h-[calc(100dvh-0.75rem)] overflow-y-auto overscroll-contain rounded-t-3xl border border-white/10 bg-[#08111b] p-5 shadow-premium outline-none sm:left-1/2 sm:top-1/2 sm:bottom-auto sm:w-[min(92vw,680px)] sm:rounded-2xl sm:p-6">
+            <div className="sticky -top-5 z-10 -mx-5 -mt-5 mb-5 flex items-start justify-between gap-4 border-b border-white/[0.06] bg-[#08111b]/95 px-5 pb-4 pt-5 backdrop-blur-md sm:-top-6 sm:-mx-6 sm:-mt-6 sm:px-6 sm:pt-6">
               <div>
                 <Dialog.Title className="text-xl font-semibold tracking-tight text-white">
                   {t('title')}
                 </Dialog.Title>
                 <Dialog.Description className="mt-2 text-sm leading-6 text-slate-300">
-                  {t('subtitle')}
+                  {t(showLeadForm ? 'subtitle' : 'directOnlySubtitle')}
                 </Dialog.Description>
               </div>
               <Dialog.Close
@@ -55,6 +62,19 @@ export function ContactProvider({children}: {children: ReactNode}) {
                 <X aria-hidden="true" className="h-4 w-4" />
               </Dialog.Close>
             </div>
+
+            {showLeadForm ? (
+              <>
+                <ContactRequestForm />
+                <div className="my-6 h-px bg-white/10" aria-hidden="true" />
+              </>
+            ) : null}
+
+            {showLeadForm ? (
+              <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
+                {t('directTitle')}
+              </p>
+            ) : null}
 
             <div className="grid grid-cols-3 gap-2 sm:gap-3">
               {messengerContacts.map((contact) => (
@@ -69,7 +89,7 @@ export function ContactProvider({children}: {children: ReactNode}) {
                     alt=""
                     width={44}
                     height={44}
-                    className="h-11 w-11 shrink-0 transition duration-200 group-hover:scale-105"
+                    className="h-9 w-9 shrink-0 transition duration-200 group-hover:scale-105 min-[375px]:h-11 min-[375px]:w-11"
                   />
                   <span className="text-sm font-semibold text-white">
                     {t(`options.${contact.key}.label` as const)}
@@ -120,6 +140,7 @@ export function ContactTrigger({
         onClick?.(event);
 
         if (!event.defaultPrevented) {
+          trackElementEvent('contact_open', event.currentTarget);
           openContact();
         }
       }}

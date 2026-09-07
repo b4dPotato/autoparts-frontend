@@ -26,6 +26,8 @@ export function LanguageSwitcher({ariaLabel, locale}: LanguageSwitcherProps) {
           href={`/${item}`}
           className={`language-switcher__item ${index === activeIndex ? 'language-switcher__item--active' : ''}`}
           aria-current={item === locale ? 'page' : undefined}
+          data-track="navigation_click"
+          data-track-label={`locale:${item}`}
           onClick={() => setActiveIndex(index)}
           onBlur={() => setActiveIndex(currentIndex)}
           onFocus={() => setActiveIndex(index)}

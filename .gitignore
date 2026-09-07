@@ -3,6 +3,7 @@ node_modules/
 out/
 qa/
 .env*.local
+.env
 *.log
 *.tsbuildinfo
 

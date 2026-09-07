@@ -3,6 +3,7 @@ import {contactPhone} from '@/config/contacts';
 import {siteConfig} from '@/config/site';
 import {getLocaleMessages} from '@/i18n/messages';
 import {isLocale, type Locale} from '@/i18n/routing';
+import {isLeadEmailNotificationsEnabled} from '@/server/settings/feature-flags';
 import {notFound} from 'next/navigation';
 
 type PageProps = {
@@ -20,6 +21,7 @@ export default async function Page({params}: PageProps) {
 
   const locale = paramLocale as Locale;
   const messages = getLocaleMessages(locale);
+  const showLeadForm = await getLeadFormVisibility();
   const faqJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -53,7 +55,11 @@ export default async function Page({params}: PageProps) {
 
   return (
     <>
-      <LandingPage locale={locale} messages={messages} />
+      <LandingPage
+        locale={locale}
+        messages={messages}
+        showLeadForm={showLeadForm}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{__html: JSON.stringify(businessJsonLd)}}
@@ -64,4 +70,15 @@ export default async function Page({params}: PageProps) {
       />
     </>
   );
+}
+
+async function getLeadFormVisibility() {
+  try {
+    return await isLeadEmailNotificationsEnabled();
+  } catch {
+    console.error(
+      'Lead request form was hidden because its feature flag could not be loaded.'
+    );
+    return false;
+  }
 }

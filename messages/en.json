@@ -54,8 +54,30 @@
   },
   "contact": {
     "title": "Choose a convenient contact method",
-    "subtitle": "Message us and we will match the part by VIN, vehicle model, or part photo.",
+    "subtitle": "Send your details and we will contact you to match the right part.",
+    "directOnlySubtitle": "Message us - we'll find the right part by VIN, vehicle make, or a photo of the part.",
     "close": "Close contact dialog",
+    "directTitle": "Or contact us directly",
+    "form": {
+      "vinLabel": "VIN",
+      "vinPlaceholder": "17-character VIN",
+      "vinHint": "The VIN contains 17 letters and numbers.",
+      "contactLabel": "Phone number",
+      "contactPlaceholder": "+380…",
+      "descriptionLabel": "Description",
+      "optional": "Optional",
+      "descriptionPlaceholder": "Which part do you need? Add the vehicle model or any useful details.",
+      "submit": "Send request",
+      "submitting": "Sending…",
+      "successTitle": "Request received",
+      "successText": "Thank you. We will call you at the number provided.",
+      "errors": {
+        "vin": "Enter a valid 17-character VIN without I, O, or Q.",
+        "contactValue": "Enter a valid phone number.",
+        "description": "Keep the description under 1,000 characters.",
+        "submit": "We could not send your request. Please try again or use a direct contact option below."
+      }
+    },
     "options": {
       "telegram": {
         "label": "Telegram",

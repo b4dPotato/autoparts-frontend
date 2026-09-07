@@ -43,7 +43,10 @@ import type { AppMessages } from "@/i18n/messages";
 type LandingPageProps = {
   locale: Locale;
   messages: AppMessages;
+  showLeadForm: boolean;
 };
+
+type LocalizedContentProps = Pick<LandingPageProps, "locale" | "messages">;
 
 const trustIcons: LucideIcon[] = [
   BadgeCheck,
@@ -86,11 +89,11 @@ const categoryImages: StaticImageData[] = [
   otherPartsImage,
 ];
 
-export function LandingPage({ locale, messages }: LandingPageProps) {
+export function LandingPage({ locale, messages, showLeadForm }: LandingPageProps) {
   const t = messages;
 
   return (
-    <ContactProvider>
+    <ContactProvider showLeadForm={showLeadForm}>
       <div className="mobile-contact-bar-space min-h-screen overflow-hidden bg-ink text-white">
         <Header locale={locale} messages={t} />
         <main>
@@ -111,12 +114,14 @@ export function LandingPage({ locale, messages }: LandingPageProps) {
   );
 }
 
-function Header({ locale, messages }: LandingPageProps) {
+function Header({ locale, messages }: LocalizedContentProps) {
   return (
     <header className="scroll-lock-compensated fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-[#05080d]/82 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-md">
       <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
         <Link
           href={`/${locale}`}
+          data-track="navigation_click"
+          data-track-label="header-logo"
           className="flex items-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           aria-label={messages.header.logoAria}
         >
@@ -735,7 +740,7 @@ function FinalCta({ messages }: { messages: AppMessages }) {
   );
 }
 
-function Footer({ locale, messages }: LandingPageProps) {
+function Footer({ locale, messages }: LocalizedContentProps) {
   return (
     <footer className="border-t border-white/10 px-5 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr_0.9fr_0.9fr]">
@@ -839,6 +844,8 @@ function FooterList({
             <a
               key={`${item.href}-${item.label}`}
               href={item.href}
+              data-track="navigation_click"
+              data-track-label={item.label}
               aria-current={item.href === currentHref ? "page" : undefined}
               className="transition duration-200 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >

@@ -4,6 +4,7 @@ import {notFound} from 'next/navigation';
 import Script from 'next/script';
 import '../globals.css';
 import {siteConfig} from '@/config/site';
+import {TrackingProvider} from '@/components/tracking-provider';
 import {getLocaleMessages} from '@/i18n/messages';
 import {isLocale, locales, type Locale} from '@/i18n/routing';
 
@@ -121,6 +122,7 @@ export default async function LocaleLayout({children, params}: LocaleLayoutProps
       </head>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
+          <TrackingProvider />
           {children}
         </NextIntlClientProvider>
       </body>
