@@ -1,5 +1,6 @@
 import {
   bigint,
+  bigserial,
   boolean,
   index,
   integer,
@@ -121,6 +122,9 @@ export const leads = pgTable(
   'leads',
   {
     id: uuid('id').primaryKey(),
+    requestNumber: bigserial('request_number', {mode: 'number'})
+      .notNull()
+      .unique(),
     visitorId: uuid('visitor_id').references(() => visitors.id, {
       onDelete: 'set null'
     }),
