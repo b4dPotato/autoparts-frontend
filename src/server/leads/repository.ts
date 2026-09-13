@@ -95,6 +95,16 @@ export async function updateLeadEmailStatus(
     .where(eq(leads.id, leadId));
 }
 
+export async function deleteLeadById(leadId: string) {
+  const db = getDatabase();
+  const [deletedLead] = await db
+    .delete(leads)
+    .where(eq(leads.id, leadId))
+    .returning({id: leads.id});
+
+  return Boolean(deletedLead);
+}
+
 export async function getLeadDashboardData({
   from,
   to

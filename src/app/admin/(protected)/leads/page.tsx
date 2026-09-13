@@ -6,6 +6,7 @@ import {
   Inbox,
   MailCheck
 } from 'lucide-react';
+import {DeleteLeadButton} from '@/components/admin/delete-lead-button';
 import {formatAdminDate} from '@/components/admin/format';
 import {PageHeader} from '@/components/admin/page-header';
 import {StatCard} from '@/components/admin/stat-card';
@@ -97,12 +98,16 @@ export default async function LeadsPage({
                 <th className="px-4 py-3.5 font-semibold">Description</th>
                 <th className="px-4 py-3.5 font-semibold">Source</th>
                 <th className="px-4 py-3.5 font-semibold">Email</th>
+                <th className="px-4 py-3.5 text-right font-semibold">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/[0.055]">
               {data.items.map((lead) => (
                 <tr key={lead.id} className="align-top transition hover:bg-white/[0.025]">
                   <td className="whitespace-nowrap px-4 py-4 text-slate-300">
+                    <p className="mb-1 text-xs font-semibold text-amber-300/80">
+                      Request #{lead.requestNumber}
+                    </p>
                     {formatAdminDate(lead.createdAt)}
                     {lead.sessionId ? (
                       <p className="mt-1">
@@ -129,11 +134,19 @@ export default async function LeadsPage({
                     {lead.gclid ? <p className="mt-1 max-w-44 truncate text-xs text-slate-600" title={lead.gclid}>GCLID · {lead.gclid}</p> : null}
                   </td>
                   <td className="px-4 py-4">{emailBadge(lead)}</td>
+                  <td className="px-4 py-4">
+                    <div className="flex justify-end">
+                      <DeleteLeadButton
+                        leadId={lead.id}
+                        requestNumber={lead.requestNumber}
+                      />
+                    </div>
+                  </td>
                 </tr>
               ))}
               {!data.items.length ? (
                 <tr>
-                  <td colSpan={6} className="px-4 py-16 text-center">
+                  <td colSpan={7} className="px-4 py-16 text-center">
                     <p className="font-medium text-slate-400">No leads found</p>
                     <p className="mt-1 text-xs text-slate-600">New contact form requests will appear here.</p>
                   </td>

@@ -32,6 +32,7 @@ import otherPartsImage from "@/assets/categories/other-parts.webp";
 import { BrandGrid } from "@/components/brand-grid";
 import { ContactProvider, ContactTrigger } from "@/components/contact-dialog";
 import { ContactLink } from "@/components/contact-link";
+import { ContactRequestForm } from "@/components/contact-request-form";
 import { FaqAccordionItem } from "@/components/faq-accordion-item";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { SmoothScrollLink } from "@/components/smooth-scroll-link";
@@ -97,13 +98,13 @@ export function LandingPage({ locale, messages, showLeadForm }: LandingPageProps
       <div className="mobile-contact-bar-space min-h-screen overflow-hidden bg-ink text-white">
         <Header locale={locale} messages={t} />
         <main>
-          <Hero messages={t} />
+          <Hero messages={t} showLeadForm={showLeadForm} />
           <TrustStrip messages={t} />
           <Brands messages={t} />
           <Categories messages={t} />
           <NewAndUsedParts messages={t} />
           <BudgetOptions messages={t} />
-          <HowItWorks messages={t} />
+          <HowItWorks messages={t} showLeadForm={showLeadForm} />
           <Faq messages={t} />
           <FinalCta messages={t} />
         </main>
@@ -169,7 +170,13 @@ function Header({ locale, messages }: LocalizedContentProps) {
   );
 }
 
-function Hero({ messages }: { messages: AppMessages }) {
+function Hero({
+  messages,
+  showLeadForm,
+}: {
+  messages: AppMessages;
+  showLeadForm: boolean;
+}) {
   return (
     <section
       className="relative flex min-h-[100dvh] items-start overflow-hidden sm:items-center"
@@ -241,12 +248,14 @@ function Hero({ messages }: { messages: AppMessages }) {
             <ContactTrigger className="cta-pulse-glow inline-flex items-center justify-center rounded-full bg-gold px-7 py-4 text-base font-semibold text-ink transition-colors duration-300 ease-out hover:bg-[#ffd06d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
               <ContactButtonContent label={messages.hero.primaryCta} />
             </ContactTrigger>
-            <SmoothScrollLink
-              href="#how-it-works"
-              className="rounded-full px-2 py-3 text-sm font-semibold text-slate-200 transition duration-200 ease-out hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-            >
-              {messages.hero.secondaryAction}
-            </SmoothScrollLink>
+            {showLeadForm ? (
+              <SmoothScrollLink
+                href="#vin-request-form"
+                className="rounded-full px-2 py-3 text-sm font-semibold text-slate-200 transition duration-200 ease-out hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              >
+                {messages.hero.secondaryAction}
+              </SmoothScrollLink>
+            ) : null}
           </div>
         </div>
       </div>
@@ -590,7 +599,13 @@ function NewAndUsedParts({ messages }: { messages: AppMessages }) {
   );
 }
 
-function HowItWorks({ messages }: { messages: AppMessages }) {
+function HowItWorks({
+  messages,
+  showLeadForm,
+}: {
+  messages: AppMessages;
+  showLeadForm: boolean;
+}) {
   return (
     <section
       id="how-it-works"
@@ -621,6 +636,27 @@ function HowItWorks({ messages }: { messages: AppMessages }) {
             </li>
           ))}
         </ol>
+        {showLeadForm ? (
+          <div
+            id="vin-request-form"
+            className="mt-12 scroll-mt-28 rounded-3xl border border-gold/25 bg-gold/[0.055] p-5 shadow-[0_28px_90px_rgba(0,0,0,0.24)] sm:p-7 lg:grid lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-10 lg:p-10"
+          >
+            <div className="max-w-xl lg:pt-2">
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gold">
+                VIN
+              </p>
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                {messages.how.formTitle}
+              </h3>
+              <p className="mt-4 text-sm leading-7 text-slate-300 sm:text-base">
+                {messages.how.formText}
+              </p>
+            </div>
+            <div className="mt-7 rounded-2xl border border-white/10 bg-[#08111b] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] lg:mt-0 lg:p-6">
+              <ContactRequestForm idPrefix="inline-contact" />
+            </div>
+          </div>
+        ) : null}
       </div>
     </section>
   );

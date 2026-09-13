@@ -12,9 +12,22 @@ type FieldErrors = Partial<
 const inputClassName =
   'mt-1.5 w-full rounded-xl border border-white/10 bg-black/20 px-3.5 py-3 text-base text-white outline-none transition placeholder:text-slate-600 hover:border-white/20 focus:border-gold/70 focus:ring-2 focus:ring-gold/15 disabled:cursor-not-allowed disabled:opacity-60';
 
-export function ContactRequestForm() {
+type ContactRequestFormProps = {
+  idPrefix?: string;
+};
+
+export function ContactRequestForm({
+  idPrefix = 'contact'
+}: ContactRequestFormProps = {}) {
   const t = useTranslations('contact.form');
   const locale = useLocale();
+  const formId = `${idPrefix}-request-form`;
+  const vinId = `${idPrefix}-vin`;
+  const vinErrorId = `${idPrefix}-vin-error`;
+  const contactId = `${idPrefix}-value`;
+  const contactErrorId = `${idPrefix}-value-error`;
+  const descriptionId = `${idPrefix}-description`;
+  const descriptionErrorId = `${idPrefix}-description-error`;
   const [status, setStatus] = useState<
     'idle' | 'submitting' | 'success' | 'error'
   >('idle');
@@ -116,13 +129,13 @@ export function ContactRequestForm() {
   const isSubmitting = status === 'submitting';
 
   return (
-    <form id="contact-request-form" noValidate onSubmit={submitRequest}>
+    <form id={formId} noValidate onSubmit={submitRequest}>
       <div>
-        <label htmlFor="contact-vin" className="text-sm font-semibold text-white">
+        <label htmlFor={vinId} className="text-sm font-semibold text-white">
           {t('vinLabel')}
         </label>
         <input
-          id="contact-vin"
+          id={vinId}
           name="vin"
           type="text"
           autoComplete="off"
@@ -130,7 +143,7 @@ export function ContactRequestForm() {
           maxLength={17}
           disabled={isSubmitting}
           aria-invalid={Boolean(fieldErrors.vin)}
-          aria-describedby={fieldErrors.vin ? 'contact-vin-error' : undefined}
+          aria-describedby={fieldErrors.vin ? vinErrorId : undefined}
           className={`${inputClassName} font-mono uppercase tracking-[0.08em]`}
           placeholder={t('vinPlaceholder')}
           onInput={(event) => {
@@ -141,7 +154,7 @@ export function ContactRequestForm() {
           }}
         />
         {fieldErrors.vin ? (
-          <p id="contact-vin-error" className="mt-1.5 text-sm text-rose-300">
+          <p id={vinErrorId} className="mt-1.5 text-sm text-rose-300">
             {fieldErrors.vin}
           </p>
         ) : null}
@@ -149,13 +162,13 @@ export function ContactRequestForm() {
 
       <div className="mt-4">
         <label
-          htmlFor="contact-value"
+          htmlFor={contactId}
           className="text-sm font-semibold text-white"
         >
           {t('contactLabel')}
         </label>
         <input
-          id="contact-value"
+          id={contactId}
           name="contactValue"
           type="tel"
           inputMode="tel"
@@ -164,7 +177,7 @@ export function ContactRequestForm() {
           disabled={isSubmitting}
           aria-invalid={Boolean(fieldErrors.contactValue)}
           aria-describedby={
-            fieldErrors.contactValue ? 'contact-value-error' : undefined
+            fieldErrors.contactValue ? contactErrorId : undefined
           }
           className={inputClassName}
           placeholder={t('contactPlaceholder')}
@@ -178,7 +191,7 @@ export function ContactRequestForm() {
           }}
         />
         {fieldErrors.contactValue ? (
-          <p id="contact-value-error" className="mt-1.5 text-sm text-rose-300">
+          <p id={contactErrorId} className="mt-1.5 text-sm text-rose-300">
             {fieldErrors.contactValue}
           </p>
         ) : null}
@@ -187,7 +200,7 @@ export function ContactRequestForm() {
       <div className="mt-4">
         <div className="flex items-baseline justify-between gap-3">
           <label
-            htmlFor="contact-description"
+            htmlFor={descriptionId}
             className="text-sm font-semibold text-white"
           >
             {t('descriptionLabel')}
@@ -195,14 +208,14 @@ export function ContactRequestForm() {
           <span className="text-xs text-slate-500">{t('optional')}</span>
         </div>
         <textarea
-          id="contact-description"
+          id={descriptionId}
           name="description"
           rows={3}
           maxLength={1000}
           disabled={isSubmitting}
           aria-invalid={Boolean(fieldErrors.description)}
           aria-describedby={
-            fieldErrors.description ? 'contact-description-error' : undefined
+            fieldErrors.description ? descriptionErrorId : undefined
           }
           className={`${inputClassName} resize-y`}
           placeholder={t('descriptionPlaceholder')}
@@ -217,7 +230,7 @@ export function ContactRequestForm() {
         />
         {fieldErrors.description ? (
           <p
-            id="contact-description-error"
+            id={descriptionErrorId}
             className="mt-1.5 text-sm text-rose-300"
           >
             {fieldErrors.description}

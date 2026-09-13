@@ -261,6 +261,8 @@
   "how": {
     "title": "How it works",
     "text": "No cart, account, or long forms. Everything happens in the messenger that is easiest for you.",
+    "formTitle": "Find a part by VIN",
+    "formText": "Complete the short form. We will check the VIN, confirm the part you need, and contact you with suitable options.",
     "steps": [
       {
         "title": "Send your vehicle details",

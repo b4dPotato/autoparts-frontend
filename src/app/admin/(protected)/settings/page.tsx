@@ -33,7 +33,7 @@ export default async function SettingsPage() {
             <div>
               <h2 className="font-semibold text-white">Lead email notifications</h2>
               <p className="mt-1 max-w-xl text-sm leading-6 text-slate-400">
-                OFF hides the request form from the public contact dialog. ON shows the form, saves every request to Neon first, and then uses the existing Resend integration for the owner notification.
+                OFF hides request forms and their dedicated VIN action from the public site. ON shows the inline and dialog forms, saves every request to Neon first, and then uses the existing Resend integration for the owner notification.
               </p>
             </div>
           </div>
