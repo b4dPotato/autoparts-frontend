@@ -211,7 +211,7 @@ function Hero({
       />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-8">
+      <div className="hero-content relative z-10 mx-auto w-full max-w-7xl px-5 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-8">
         <div className="max-w-2xl">
           <h1
             id="hero-title"
@@ -219,15 +219,15 @@ function Hero({
           >
             {messages.hero.title}
           </h1>
-          <p className="mt-4 max-w-xl text-base leading-8 text-slate-200 sm:mt-6 sm:text-lg">
+          <p className="hero-description mt-4 max-w-xl text-base leading-8 text-slate-200 sm:mt-6 sm:text-lg">
             {messages.hero.subtitle}
           </p>
 
-          <div className="mt-5 max-w-[560px] sm:mt-7">
+          <div className="hero-vehicles mt-5 max-w-[560px] sm:mt-7">
             <p className="text-base font-semibold text-white">
               {messages.hero.vehicleIntro}
             </p>
-            <div className="mt-3 grid grid-cols-2 gap-2 min-[520px]:grid-cols-4 sm:gap-2.5">
+            <div className="hero-vehicle-grid mt-3 grid grid-cols-2 gap-2 min-[520px]:grid-cols-4 sm:gap-2.5">
               {messages.hero.vehicleTypes.map((item, index) => {
                 const Icon = vehicleTypeIcons[index];
 
@@ -235,21 +235,21 @@ function Hero({
                   <ContactTrigger
                     key={item}
                     aria-label={item}
-                    className="group flex min-h-[78px] flex-col items-center justify-center rounded-lg border border-white/15 bg-white/[0.055] px-2 py-2.5 text-center text-xs font-medium text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_16px_44px_rgba(0,0,0,0.22)] backdrop-blur-md transition duration-300 ease-out hover:-translate-y-1 hover:border-gold/55 hover:bg-white/[0.09] hover:text-white hover:shadow-[0_18px_52px_rgba(242,184,75,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:min-h-[92px] sm:px-3 sm:py-3 sm:text-sm"
+                    className="hero-vehicle-option group flex min-h-[78px] flex-col items-center justify-center rounded-lg border border-white/15 bg-white/[0.055] px-2 py-2.5 text-center text-xs font-medium text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_16px_44px_rgba(0,0,0,0.22)] backdrop-blur-md transition duration-300 ease-out hover:-translate-y-1 hover:border-gold/55 hover:bg-white/[0.09] hover:text-white hover:shadow-[0_18px_52px_rgba(242,184,75,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:min-h-[92px] sm:px-3 sm:py-3 sm:text-sm"
                   >
                     <Icon
                       aria-hidden="true"
                       className={`mb-2 h-6 w-6 transition duration-300 group-hover:scale-110 group-hover:brightness-125 sm:mb-3 sm:h-7 sm:w-7 ${vehicleTypeIconStyles[index]}`}
                       strokeWidth={1.9}
                     />
-                    <span>{item}</span>
+                    <span className="hero-vehicle-label">{item}</span>
                   </ContactTrigger>
                 );
               })}
             </div>
           </div>
 
-          <div className="mt-4 flex flex-col items-start gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
+          <div className="hero-actions mt-4 flex flex-col items-start gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
             <ContactTrigger className="cta-pulse-glow inline-flex items-center justify-center rounded-full bg-gold px-7 py-4 text-base font-semibold text-ink transition-colors duration-300 ease-out hover:bg-[#ffd06d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
               <ContactButtonContent label={messages.hero.primaryCta} />
             </ContactTrigger>
