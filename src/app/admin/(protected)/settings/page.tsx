@@ -1,3 +1,5 @@
+import {PromotionEditor} from '@/components/admin/promotion-editor';
+import {getPromotion} from '@/server/settings/promotion';
 import {BellRing, MailCheck, ShieldCheck} from 'lucide-react';
 import {PageHeader} from '@/components/admin/page-header';
 import {requireAdminSession} from '@/server/admin/auth';
@@ -14,6 +16,8 @@ export default async function SettingsPage() {
     isLeadEmailNotificationsEnabled(),
     Promise.resolve(isLeadEmailConfigured())
   ]);
+
+  const promotion = await getPromotion();
 
   return (
     <>
@@ -74,6 +78,7 @@ export default async function SettingsPage() {
           </div>
         </div>
       </section>
+      <PromotionEditor promotion={promotion} />
     </>
   );
 }

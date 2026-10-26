@@ -43,6 +43,13 @@
       "when": 1789290173963,
       "tag": "0005_lively_devos",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793015128916,
+      "tag": "0006_famous_revanche",
+      "breakpoints": true
     }
   ]
 }

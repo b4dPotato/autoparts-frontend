@@ -1,3 +1,5 @@
+import {FeaturedPromotion} from '@/components/featured-promotion';
+import type {Promotion} from '@/lib/promotions/contracts';
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import {
@@ -45,6 +47,7 @@ type LandingPageProps = {
   locale: Locale;
   messages: AppMessages;
   showLeadForm: boolean;
+  promotion: Promotion | null;
 };
 
 type LocalizedContentProps = Pick<LandingPageProps, "locale" | "messages">;
@@ -90,7 +93,7 @@ const categoryImages: StaticImageData[] = [
   otherPartsImage,
 ];
 
-export function LandingPage({ locale, messages, showLeadForm }: LandingPageProps) {
+export function LandingPage({ locale, messages, showLeadForm, promotion }: LandingPageProps) {
   const t = messages;
 
   return (
@@ -98,7 +101,7 @@ export function LandingPage({ locale, messages, showLeadForm }: LandingPageProps
       <div className="mobile-contact-bar-space min-h-screen overflow-hidden bg-ink text-white">
         <Header locale={locale} messages={t} />
         <main>
-          <Hero messages={t} showLeadForm={showLeadForm} />
+          <Hero messages={t} showLeadForm={showLeadForm} promotion={promotion} />
           <TrustStrip messages={t} />
           <Brands messages={t} />
           <Categories messages={t} />
@@ -173,9 +176,11 @@ function Header({ locale, messages }: LocalizedContentProps) {
 function Hero({
   messages,
   showLeadForm,
+  promotion,
 }: {
   messages: AppMessages;
   showLeadForm: boolean;
+  promotion: Promotion | null;
 }) {
   return (
     <section
@@ -258,6 +263,7 @@ function Hero({
             ) : null}
           </div>
         </div>
+        {promotion ? <FeaturedPromotion promotion={promotion} /> : null}
       </div>
       <SmoothScrollLink
         href="#trust"

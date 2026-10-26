@@ -378,5 +378,20 @@
       "en": "English"
     },
     "copyright": "© 2026 AutoParts UA. All rights reserved."
+  },
+  "promotion": {
+    "badge": "Special offer",
+    "details": "View details",
+    "mileage": "Mileage",
+    "unit": "km",
+    "vehicle": "Vehicle",
+    "engine": "Engine",
+    "transmission": "Gearbox",
+    "included": "Included",
+    "ecu": "ECU",
+    "terms": "Purchase conditions",
+    "contact": "Contact the seller",
+    "close": "Close",
+    "image": "Parts photo"
   }
 }

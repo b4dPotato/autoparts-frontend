@@ -1,3 +1,4 @@
+import {getPublicPromotion} from '@/server/settings/promotion';
 import {LandingPage} from '@/components/landing-page';
 import {contactPhone} from '@/config/contacts';
 import {siteConfig} from '@/config/site';
@@ -21,7 +22,7 @@ export default async function Page({params}: PageProps) {
 
   const locale = paramLocale as Locale;
   const messages = getLocaleMessages(locale);
-  const showLeadForm = await getLeadFormVisibility();
+  const [showLeadForm, promotion] = await Promise.all([getLeadFormVisibility(), getPublicPromotion()]);
   const faqJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -58,6 +59,7 @@ export default async function Page({params}: PageProps) {
       <LandingPage
         locale={locale}
         messages={messages}
+        promotion={promotion}
         showLeadForm={showLeadForm}
       />
       <script

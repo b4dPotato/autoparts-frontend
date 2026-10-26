@@ -181,3 +181,9 @@ export type Session = typeof sessions.$inferSelect;
 export type TrackingEvent = typeof trackingEvents.$inferSelect;
 export type Lead = typeof leads.$inferSelect;
 export type FeatureFlag = typeof featureFlags.$inferSelect;
+
+export const promotions = pgTable('promotions', {
+  id: varchar('id', {length: 64}).primaryKey(),
+  data: jsonb('data').$type<import('@/lib/promotions/contracts').Promotion>().notNull(),
+  updatedAt: timestamp('updated_at', {withTimezone: true}).notNull().defaultNow()
+});

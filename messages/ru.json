@@ -378,5 +378,20 @@
       "en": "English"
     },
     "copyright": "© 2026 AutoParts UA. Все права защищены."
+  },
+  "promotion": {
+    "badge": "Спецпредложение",
+    "details": "Подробнее",
+    "mileage": "Пробег",
+    "unit": "км",
+    "vehicle": "Автомобиль",
+    "engine": "Двигатель",
+    "transmission": "КПП",
+    "included": "В комплекте",
+    "ecu": "ЭБУ",
+    "terms": "Условия покупки",
+    "contact": "Связаться с продавцом",
+    "close": "Закрыть",
+    "image": "Фото запчастей"
   }
 }

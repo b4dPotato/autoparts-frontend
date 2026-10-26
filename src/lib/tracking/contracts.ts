@@ -2,6 +2,8 @@ import {z} from 'zod';
 
 export const trackingEventTypes = [
   'page_view',
+  'promotion_impression',
+  'promotion_details_open',
   'contact_open',
   'phone_click',
   'telegram_click',

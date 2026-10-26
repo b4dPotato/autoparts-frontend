@@ -123,6 +123,14 @@ export function trackElementEvent(
   element: HTMLElement,
   metadata?: EventRequest['metadata']
 ) {
+  const promotion = element.closest<HTMLElement>('[data-promotion-id]');
+  const promotionMetadata: NonNullable<EventRequest['metadata']> = promotion
+    ? {
+        promotionId: promotion.dataset.promotionId ?? null,
+        placement: promotion.dataset.promotionPlacement ?? null,
+        locale: document.documentElement.lang
+      }
+    : {};
   const anchor = element.closest<HTMLAnchorElement>('a');
   const text = element.textContent?.replace(/\s+/g, ' ').trim().slice(0, 256);
 
@@ -132,7 +140,7 @@ export function trackElementEvent(
     targetText: text || null,
     targetHref: anchor?.href.slice(0, 2048) ?? null,
     targetId: element.id.slice(0, 128) || null,
-    metadata
+    metadata: promotion ? {...promotionMetadata, ...metadata} : metadata
   });
 }
 
