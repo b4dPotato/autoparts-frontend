@@ -596,7 +596,7 @@ summary::-webkit-details-marker {
   }
 
   .hero-vehicles {
-    margin-top: 1rem;
+    display: none;
   }
 
   .hero-vehicles > p {
