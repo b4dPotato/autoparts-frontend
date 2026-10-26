@@ -1,4 +1,5 @@
 import {FeaturedPromotion} from '@/components/featured-promotion';
+import { HeroSection } from '@/components/hero-section';
 import type {Promotion} from '@/lib/promotions/contracts';
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
@@ -183,10 +184,7 @@ function Hero({
   promotion: Promotion | null;
 }) {
   return (
-    <section
-      className="relative flex min-h-[100dvh] items-start overflow-hidden sm:items-center"
-      aria-labelledby="hero-title"
-    >
+    <HeroSection>
       <div className="absolute inset-0 bg-ink" aria-hidden="true">
         <HeroMotionLayer
           src="/assets/hero/hero-bg.png"
@@ -272,7 +270,7 @@ function Hero({
       >
         <ArrowDown aria-hidden="true" className="h-5 w-5" />
       </SmoothScrollLink>
-    </section>
+    </HeroSection>
   );
 }
 
